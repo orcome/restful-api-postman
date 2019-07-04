@@ -15,7 +15,11 @@ class CountryController extends Controller
 
     public function countryByID($id)
     {
-        return response()->json(CountryModel::find($id), 200); // 200 :OK
+        $country = CountryModel::find($id);
+        if (is_null($country)) {
+            return response()->json('Record not found!', 404); // 404 :Data request tidak ditemukan di server
+        }
+        return response()->json($country, 200); // 200 :OK
     }
 
     public function countrySave(Request $request)
