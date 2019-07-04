@@ -29,4 +29,10 @@ class CountryController extends Controller
         $country->update($request->all());
         return response()->json($country, 200); // 200 :OK
     }
+
+    public function countryDelete(Request $request, CountryModel $country)
+    {
+        $country->delete();
+        return response()->json(null, 204); //204 :Tidak ada data yang dikirim untuk request ini
+    }
 }
