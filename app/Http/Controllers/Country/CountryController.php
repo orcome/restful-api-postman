@@ -38,8 +38,12 @@ class CountryController extends Controller
         return response()->json($country, 200); // 200 :OK
     }
 
-    public function countryDelete(Request $request, CountryModel $country)
+    public function countryDelete(Request $request, $id)
     {
+        $country = CountryModel::find($id);
+        if (is_null($country)) {
+            return response()->json('Record not found!', 404); // 404 :Data request tidak ditemukan di server
+        }
         $country->delete();
         return response()->json(null, 204); //204 :Tidak ada data yang dikirim untuk request ini
     }
